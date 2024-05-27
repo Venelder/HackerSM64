@@ -572,7 +572,7 @@ DEFINE_DIALOG(DIALOG_046, 1, 5, 30, 200, _("\
 You have to master three\n\
 important jumping\n\
 techniques.\n\
-First try the Triple Jump.\n\
+First try the what the fuck.\n\
 \n\
 Run fast, then jump three\n\
 times, one, two, three.\n\

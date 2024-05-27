@@ -635,10 +635,6 @@ s32 act_long_jump(struct MarioState *m) {
         m->actionState = 1;
     }
 
-    if (m->input & INPUT_Z_PRESSED) {
-        set_mario_action(m, ACT_TRIPLE_JUMP, 0);
-    }
-
     common_air_action_step(m, ACT_LONG_JUMP_LAND, animation, AIR_STEP_CHECK_LEDGE_GRAB);
 #if ENABLE_RUMBLE
     if (m->action == ACT_LONG_JUMP_LAND) {
@@ -913,6 +909,16 @@ s32 act_steep_jump(struct MarioState *m) {
 s32 act_ground_pound(struct MarioState *m) {
     u32 stepResult;
     f32 yOffset;
+
+    // Ground-Pound Dive custom move.
+    if (m->input & INPUT_B_PRESSED) {
+        set_mario_action(m, ACT_DIVE, 0);
+        m->vel[1] = 40.0f; // 0, 1, 2, = x, y, z
+        m->forwardVel = 60.0f; // x and z together.
+        m->faceAngle[1] = m->intendedYaw;
+
+        return FALSE;
+    }
 
     play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
 
