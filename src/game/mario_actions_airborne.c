@@ -909,6 +909,7 @@ s32 act_steep_jump(struct MarioState *m) {
 s32 act_ground_pound(struct MarioState *m) {
     u32 stepResult;
     f32 yOffset;
+    struct MarioBodyState *bodyState = m->marioBodyState;
 
     // Ground-Pound Dive custom move.
     if (m->input & INPUT_B_PRESSED) {
@@ -916,6 +917,7 @@ s32 act_ground_pound(struct MarioState *m) {
         m->vel[1] = 40.0f; // 0, 1, 2, = x, y, z
         m->forwardVel = 60.0f; // x and z together.
         m->faceAngle[1] = m->intendedYaw;
+        bodyState->capState = MARIO_HAS_WING_CAP_ON;
 
         return FALSE;
     }
